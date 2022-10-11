@@ -1,0 +1,11 @@
+<mat-form-field appearance="fill">
+    <mat-label>Search a dog breed</mat-label>
+    <input matInput [matAutocomplete]="auto">
+    <mat-icon matSuffix>search</mat-icon>
+</mat-form-field>
+
+<mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let breed of breeds | keyvalue" [value]="breed.key">
+        {{breed.key}}
+    </mat-option>
+</mat-autocomplete>

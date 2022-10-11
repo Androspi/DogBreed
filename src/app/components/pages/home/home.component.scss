@@ -1,0 +1,22 @@
+main {
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    display: flex;
+    height: 100vh;
+    width: 100%;
+
+    &::after {
+        background-image: url(/assets/img/background.jpg);
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        content: "";
+        z-index: -1;
+        left: 0;
+        top: 0;
+    }
+}
