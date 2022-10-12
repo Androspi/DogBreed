@@ -1,0 +1,16 @@
+<section id="dog-image-container">
+
+    <mat-grid-list cols="4" gutterSize="12px">
+        <ng-container *ngFor="let src of images">
+            <mat-grid-tile>
+                <mat-card style="height: 100%; padding: 0;">
+                    <div style="padding: 16px;">
+                        {{src}}
+                    </div>
+                </mat-card>
+            </mat-grid-tile>
+        </ng-container>
+    </mat-grid-list>
+
+
+</section>

@@ -1,0 +1,38 @@
+:host {
+    width: var(--width, 70vw);
+    margin-top: 2rem;
+    overflow: auto;
+    height: 0px;
+
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    animation-duration: 0.5s;
+
+    &.grow {
+        animation-name: grow;
+    }
+
+    &:not(.grow) {
+        animation-name: decrease;
+    }
+}
+
+@keyframes grow {
+    from {
+        height: 0px;
+    }
+
+    to {
+        height: var(--height, 70vh);
+    }
+}
+
+@keyframes decrease {
+    from {
+        height: var(--height, 70vh);
+    }
+
+    to {
+        height: 0px;
+    }
+}

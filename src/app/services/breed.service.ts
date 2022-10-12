@@ -16,4 +16,8 @@ export class BreedService {
     return this.http.get<Record<string, string[]>>(`${environment.dogApi}breeds/list/all`);
   }
 
+  list(breed: string) {
+    return this.http.get<string[]>(`${environment.dogApi}breed/${breed}/images`);
+  }
+
 }

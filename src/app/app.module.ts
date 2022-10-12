@@ -4,14 +4,14 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
-import { SharedModule } from './components/pages/shared.module';
+import { SharedModule } from './components/shared.module';
 
 import { RestInterceptor } from './interceptors/rest.interceptor';
 
 import { AppComponent } from './app.component';
 
 const routes: Routes = [
-  { path: '', loadChildren: () => import('./components/pages/home/home.module').then(m => m.HomeModule) }
+  { path: '', loadChildren: () => import('./components/home/home.module').then(m => m.HomeModule) }
 ];
 
 @NgModule({
