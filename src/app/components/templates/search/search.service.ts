@@ -2,8 +2,9 @@ import { FormControl } from '@angular/forms';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
+import { StringUtility } from 'src/app/utilties/string.service';
+
 import { BreedItem } from './search.interface';
-import { StringUtility } from 'src/app/utilties/string.utility';
 
 @Injectable({ providedIn: 'root' })
 export class SearchService {
@@ -11,9 +12,13 @@ export class SearchService {
   breeds = new BehaviorSubject<BreedItem[]>([]);
   searchControl = new FormControl('');
 
+  constructor(
+    private stringUtility: StringUtility
+  ) { }
+
   get searchValue() {
     const { value } = this.searchControl;
-    return StringUtility.trim(typeof value === 'string' ? value : value.text);
+    return this.stringUtility.trim(typeof value === 'string' ? value : value.text);
   }
 
 }

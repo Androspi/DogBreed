@@ -1,14 +1,12 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
-import { StringUtility } from 'src/app/utilties/string.utility';
-
+import { StringUtility } from 'src/app/utilties/string.service';
 import { BreedService } from 'src/app/services/breed.service';
+import { SearchService } from './search.service';
 
 import { Breed } from 'src/app/interfaces/breed.interface';
 import { BreedItem } from './search.interface';
-import { FormControl } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { SearchService } from './search.service';
 
 @Component({
   templateUrl: './search.component.html',
@@ -20,6 +18,7 @@ export class SearchComponent implements OnInit {
   breeds: Breed = {};
 
   constructor(
+    private stringUtility: StringUtility,
     public service: SearchService,
     private route: ActivatedRoute,
     private $breed: BreedService,
@@ -53,13 +52,13 @@ export class SearchComponent implements OnInit {
 
   allBreeds() {
     const breeds: BreedItem[] = Object.keys(this.breeds).map(breed => ({
-      text: StringUtility.capitalizeFirst(breed),
+      text: this.stringUtility.capitalizeFirst(breed),
       id: breed
     }));
 
     const subBreeds: BreedItem[] = breeds.map(({ id, text }) => {
       return this.breeds[id].map(subBreed => ({
-        text: `${text} - (${StringUtility.capitalizeFirst(subBreed)})`,
+        text: `${text} - (${this.stringUtility.capitalizeFirst(subBreed)})`,
         id: `${id}/${subBreed}`,
       }));
     }).flat();
