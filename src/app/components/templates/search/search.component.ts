@@ -29,7 +29,7 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {
     this.#getBreeds();
     this.#trackSearchControl();
-  } 
+  }
 
   #getBreeds() {
     this.$breed.all().subscribe(breeds => {
@@ -51,7 +51,7 @@ export class SearchComponent implements OnInit {
     });
   }
 
-  filterBreeds(search: string) {
+  allBreeds() {
     const breeds: BreedItem[] = Object.keys(this.breeds).map(breed => ({
       text: StringUtility.capitalizeFirst(breed),
       id: breed
@@ -64,11 +64,21 @@ export class SearchComponent implements OnInit {
       }));
     }).flat();
 
-    this.service.breeds.next([...breeds, ...subBreeds].filter(({ text }) => text.toLowerCase().includes(search.toLowerCase())));
+    return [...breeds, ...subBreeds];
+  }
+
+  filterBreeds(search: string) {
+    this.service.breeds.next(this.allBreeds().filter(({ text }) => text.toLowerCase().includes(search.toLowerCase())));
   }
 
   displayBreed({ text }: BreedItem) {
     return text;
+  }
+
+  shuffle() {
+    const breeds = this.allBreeds();
+    const index = Math.floor(Math.random() * breeds.length);
+    this.service.searchControl.setValue(breeds[index]);
   }
 
 }

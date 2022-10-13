@@ -17,3 +17,43 @@ body {
     font: 400 14px/20px Montserrat, Roboto, "Helvetica Neue", sans-serif;
     letter-spacing: normal;
 }
+
+.pretty-scrollbar {
+    &::-webkit-scrollbar {
+        background-color: #000000;
+        height: 1vmax;
+        cursor: grab;
+        width: 1vmin;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border: 0.4rem solid #cfcfcf;
+        background-color: #cfcfcf;
+        background-clip: content-box;
+        border-radius: 1.33rem;
+
+        &:hover {
+            background-color: #000000;
+        }
+    }
+
+    &::-webkit-scrollbar-track {
+        --webkit-box-shadow: inset 0 0 1vmin #000000;
+    }
+}
+
+@keyframes paint-image {
+    0% {
+        filter: brightness(0) invert(17%) sepia(6%) saturate(620%) hue-rotate(191deg) brightness(92%) contrast(89%);
+    }
+    50% {
+        filter: brightness(0);
+    }
+    100% {
+        filter: brightness(0) invert(17%) sepia(6%) saturate(620%) hue-rotate(191deg) brightness(92%) contrast(89%);
+    }
+}
+
+.img-loading {
+    animation: 1.5s paint-image linear infinite;
+}

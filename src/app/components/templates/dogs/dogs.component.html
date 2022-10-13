@@ -1,16 +1,25 @@
 <section id="dog-image-container">
+    <div *ngFor="let col of [].constructor(columns); index as i;">
+        <div *ngFor="let src of images | masonry:columns:(i + 1)">
+            <div class="image-container">
+                <img [src]="src" appImgLoading (click)="toggleFullScreen($any($event.target))">
 
-    <mat-grid-list cols="4" gutterSize="12px">
-        <ng-container *ngFor="let src of images">
-            <mat-grid-tile>
-                <mat-card style="height: 100%; padding: 0;">
-                    <div style="padding: 16px;">
-                        {{src}}
-                    </div>
-                </mat-card>
-            </mat-grid-tile>
+                <div class="image-text">
+                    {{src | breed}}
+                </div>
+            </div>
+        </div>
+
+        <ng-container *ngIf="loading">
+            <div *ngFor="let item of (10 | random:30) | array | masonry:columns:(i + 1); index as j">
+                <div class="loading"
+                    [ngStyle]="{ 'height': (150 | random:225) + 'px', 'animation-delay': (50 | random:300) + 'ms' }">
+                </div>
+            </div>
         </ng-container>
-    </mat-grid-list>
+    </div>
 
-
+    <ng-container *ngIf="!loading && !images.length">
+        <p style="color: #fff;">Empty result</p>
+    </ng-container>
 </section>

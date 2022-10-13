@@ -1,13 +1,20 @@
-<mat-form-field appearance="fill">
-    <mat-label>Search a dog breed</mat-label>
+<div style="display: flex; align-items: center; justify-content: center; gap: 30px;">
+    <mat-form-field appearance="fill">
+        <mat-label>Search a dog breed</mat-label>
 
-    <input matInput [matAutocomplete]="auto" [formControl]="service.searchControl">
+        <input matInput [matAutocomplete]="auto" [formControl]="service.searchControl"
+            (dblclick)="service.searchControl.setValue('')">
 
-    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayBreed">
-        <mat-option *ngFor="let breed of service.breeds.value" [value]="breed">
-            {{breed.text}}
-        </mat-option>
-    </mat-autocomplete>
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayBreed">
+            <mat-option *ngFor="let breed of service.breeds.value" [value]="breed">
+                {{breed.text}}
+            </mat-option>
+        </mat-autocomplete>
 
-    <mat-icon matSuffix>search</mat-icon>
-</mat-form-field>
+        <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+
+    <button color="primary" mat-mini-fab (click)="shuffle()">
+        <mat-icon>shuffle</mat-icon>
+    </button>
+</div>

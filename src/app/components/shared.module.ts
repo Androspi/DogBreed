@@ -3,6 +3,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { PipesModule } from '../pipes/pipes.module';
 import { MaterialModule } from './material.module';
 
 import { SearchComponent } from './templates/search/search.component';
@@ -12,7 +13,8 @@ const modules = [
   ReactiveFormsModule,
   HttpClientModule,
   MaterialModule,
-  CommonModule
+  CommonModule,
+  PipesModule,
 ];
 
 const templates = [

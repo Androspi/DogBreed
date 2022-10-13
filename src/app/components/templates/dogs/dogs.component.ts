@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 import { BreedService } from 'src/app/services/breed.service';
 import { SearchService } from '../search/search.service';
@@ -10,6 +10,14 @@ import { DogsService } from './dogs.service';
   styleUrls: ['./dogs.component.scss']
 })
 export class DogsComponent implements OnInit {
+
+  loading = false;
+
+  columns!: number;
+
+  @HostListener('window:resize') calculateColumns() {
+    this.columns = Math.floor(window.innerWidth / 420) || 1;
+  }
 
   timer = 0;
 
@@ -23,7 +31,9 @@ export class DogsComponent implements OnInit {
     private search: SearchService,
     private service: DogsService,
     private $breed: BreedService,
-  ) { }
+  ) {
+    this.calculateColumns();
+  }
 
   ngOnInit(): void {
     this.search.breeds.subscribe(() => {
@@ -42,12 +52,22 @@ export class DogsComponent implements OnInit {
       return;
     }
 
+    this.loading = true;
     this.timer = window.setTimeout(() => {
       this.$breed.list(id).subscribe(images => {
+        this.loading = false;
         this.service.images.set(id, images);
         this.images = images;
       });
-    }, 1000);
+    }, 100);
+  }
+
+  toggleFullScreen(target: HTMLElement) {
+    if (!document.fullscreenElement) {
+      target.requestFullscreen();
+    } else if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
   }
 
 }
