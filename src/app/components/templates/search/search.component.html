@@ -5,7 +5,7 @@
         <input matInput [matAutocomplete]="auto" [formControl]="service.searchControl"
             (dblclick)="service.searchControl.setValue('')">
 
-        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayBreed">
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayBreed" (optionSelected)="blur()">
             <mat-option *ngFor="let breed of service.breeds.value" [value]="breed">
                 {{breed.text}}
             </mat-option>

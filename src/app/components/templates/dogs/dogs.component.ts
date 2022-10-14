@@ -11,18 +11,23 @@ import { DogsService } from './dogs.service';
 })
 export class DogsComponent implements OnInit {
 
+  /** The system is looking for images */
   loading = false;
-
+  /** Number of images per row */
   columns!: number;
 
+  /** update the number of images per row according to device width */
   @HostListener('window:resize') calculateColumns() {
     this.columns = Math.floor(window.innerWidth / 420) || 1;
   }
 
+  /** Breed request timeout instance */
   timer = 0;
 
+  /** Dogs */
   images: string[] = [];
 
+  /** shortcut to breed list */
   get breeds() {
     return this.search.breeds.value;
   }
@@ -35,14 +40,16 @@ export class DogsComponent implements OnInit {
     this.calculateColumns();
   }
 
+  /** updates the list of images when the user filters the races */
   ngOnInit(): void {
     this.search.breeds.subscribe(() => {
       this.images = [];
       clearTimeout(this.timer);
-      this.#getImages()
+      this.#getImages();
     });
   }
 
+  /** search for dog images on Dog Api or storage */
   #getImages() {
     if (!this.breeds.length) return;
     const { id } = this.breeds[0];
@@ -53,15 +60,20 @@ export class DogsComponent implements OnInit {
     }
 
     this.loading = true;
+
     this.timer = window.setTimeout(() => {
       this.$breed.list(id).subscribe(images => {
         this.loading = false;
         this.service.images.set(id, images);
         this.images = images;
       });
-    }, 100);
+    }, 100); /** wait for the user to finish typing  */
   }
 
+  /**
+   * Toggle image on fullscreen 
+   * @param target Selected image
+   */
   toggleFullScreen(target: HTMLElement) {
     if (!document.fullscreenElement) {
       target.requestFullscreen();

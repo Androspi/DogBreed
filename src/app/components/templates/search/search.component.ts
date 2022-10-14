@@ -15,6 +15,7 @@ import { BreedItem } from './search.interface';
 })
 export class SearchComponent implements OnInit {
 
+  /** Breed list from Dog Api */
   breeds: Breed = {};
 
   constructor(
@@ -30,6 +31,7 @@ export class SearchComponent implements OnInit {
     this.#trackSearchControl();
   }
 
+  /** get the breed list from the api  */
   #getBreeds() {
     this.$breed.all().subscribe(breeds => {
       this.breeds = breeds;
@@ -37,12 +39,14 @@ export class SearchComponent implements OnInit {
     });
   }
 
+  /** Update query params when input changes, to preserve text on reload */
   #trackSearchControl() {
     this.service.searchControl.valueChanges.subscribe(() => {
       this.router.navigate([], { relativeTo: this.route, queryParams: { breed: this.service.searchValue } });
     });
   }
 
+  /** When the query parameters are updated, it filters the races that match  */
   #trackQueryParams() {
     this.route.queryParams.subscribe(({ breed = '' }) => {
       this.service.searchControl.setValue({ text: breed }, { emitEvent: false });
@@ -50,6 +54,7 @@ export class SearchComponent implements OnInit {
     });
   }
 
+  /** create a breed list including sub-breeds */
   allBreeds() {
     const breeds: BreedItem[] = Object.keys(this.breeds).map(breed => ({
       text: this.stringUtility.capitalizeFirst(breed),
@@ -66,18 +71,35 @@ export class SearchComponent implements OnInit {
     return [...breeds, ...subBreeds];
   }
 
+  /**
+   * filter the races that match
+   * @param search text to compare
+   */
   filterBreeds(search: string) {
     this.service.breeds.next(this.allBreeds().filter(({ text }) => text.toLowerCase().includes(search.toLowerCase())));
   }
 
+  /**
+   * display the breed text on the input when the user chooses an option
+   * @param param0 selected breed
+   * @returns breed text
+   */
   displayBreed({ text }: BreedItem) {
     return text;
   }
 
+  /** choose a random breed */
   shuffle() {
     const breeds = this.allBreeds();
     const index = Math.floor(Math.random() * breeds.length);
     this.service.searchControl.setValue(breeds[index]);
+  }
+
+  blur() {
+    setTimeout(() => {
+      if (!(document.activeElement instanceof HTMLElement)) return;
+      document.activeElement.blur();
+    }, 0);
   }
 
 }

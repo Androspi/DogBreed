@@ -32,6 +32,6 @@ export class RestInterceptor implements HttpInterceptor {
     #catchErrorFn = (err: any) => {
         this.snackBar.open('Sorry, please try with another breed', 'Ok');
         return err;
-    }
+    };
 
 }

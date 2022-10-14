@@ -22,7 +22,7 @@ const modules = [
 const templates = [
   SearchComponent,
   DogsComponent
-]
+];
 
 @NgModule({
   exports: [modules, templates],

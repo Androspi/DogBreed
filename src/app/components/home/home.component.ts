@@ -9,8 +9,6 @@ import { SearchService } from '../templates/search/search.service';
 })
 export class HomeComponent {
 
-  constructor(
-    public search: SearchService
-  ) { }
+  constructor(public search: SearchService) { }
 
 }
