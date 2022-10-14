@@ -2,7 +2,8 @@
     <div *ngFor="let col of [].constructor(columns); index as i;">
         <div *ngFor="let src of images | masonry:columns:(i + 1)">
             <div class="image-container">
-                <img [src]="src" appImgLoading (click)="toggleFullScreen($any($event.target))">
+                <img [src]="src" appImgLoading (click)="toggleFullScreen($any($event.target))"
+                    style="min-height: 175px;">
 
                 <div class="image-text">
                     {{src | breed}}

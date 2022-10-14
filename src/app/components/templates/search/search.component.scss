@@ -3,10 +3,16 @@
         .mat-form-field-flex {
             background: #ffffff;
             border-radius: 25px;
+
+            &:focus,
+            &:focus-within {
+                border-radius: 25px 25px 0 0;
+            }
         }
 
         .mat-form-field-underline::before {
             width: calc(100% - 30px);
+            display: none;
             left: 15px;
         }
 
@@ -40,6 +46,7 @@
         &.mat-focused {
             .mat-form-field-ripple {
                 background-color: #000000;
+                display: none;
             }
 
             .mat-form-field-label {

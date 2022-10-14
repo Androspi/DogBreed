@@ -8,10 +8,12 @@ import { MaterialModule } from './material.module';
 
 import { SearchComponent } from './templates/search/search.component';
 import { DogsComponent } from './templates/dogs/dogs.component';
+import { DirectivesModule } from '../directives/directives.module';
 
 const modules = [
   ReactiveFormsModule,
   HttpClientModule,
+  DirectivesModule,
   MaterialModule,
   CommonModule,
   PipesModule,

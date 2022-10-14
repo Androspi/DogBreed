@@ -42,18 +42,6 @@ body {
     }
 }
 
-@keyframes paint-image {
-    0% {
-        filter: brightness(0) invert(17%) sepia(6%) saturate(620%) hue-rotate(191deg) brightness(92%) contrast(89%);
-    }
-    50% {
-        filter: brightness(0);
-    }
-    100% {
-        filter: brightness(0) invert(17%) sepia(6%) saturate(620%) hue-rotate(191deg) brightness(92%) contrast(89%);
-    }
-}
-
 .img-loading {
-    animation: 1.5s paint-image linear infinite;
+    opacity: 0;
 }
